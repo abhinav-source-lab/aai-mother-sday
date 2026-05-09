@@ -1,82 +1,400 @@
+<!-- index.html (refined, warm + cute, keeping your structure + features) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Mother's Day, Aai 💖</title>
+
+  <!-- Fonts: elegant + soft handwritten accent -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Quicksand:wght@400;600;700&family=Sacramento&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- soft ambient glow -->
+<div class="ambient ambient-a"></div>
+<div class="ambient ambient-b"></div>
+
+<header class="hero section reveal">
+  <div class="container">
+
+    <p class="eyebrow">with all my love</p>
+
+    <h1>Happy Mother's Day, Aai</h1>
+
+    <p class="hero-subtitle">
+      This little space is just for you —
+      filled with love, quiet moments, and everything you mean to us.
+    </p>
+
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#gallery">Open Album ✨</a>
+
+      <button class="btn btn-soft" id="sprinkleLoveBtn">
+        Send Aai a Hug 💖
+      </button>
+      
+      <button class="btn btn-soft" id="musicBtn">
+        Play Music 🎵
+      </button>
+    </div>
+
+    <p class="hug-counter" id="hugCounterText">Hugs sent: 0</p>
+
+  </div>
+</header>
+
+<main>
+
+<!-- MESSAGE SECTION -->
+<section class="section reveal">
+  <div class="container">
+
+    <h2>Messages for You</h2>
+
+    <div class="message-grid">
+
+      <div class="message-card">
+        <h3>From Me</h3>
+        <p>
+          Aai, you are the warmth in everything we call home.
+          The way you love, care, and show up for us — it shapes who I am every day.
+          I’m endlessly grateful for you.
+        </p>
+      </div>
+
+      <div class="message-card">
+        <h3>From Aurus</h3>
+        <p>
+          Thank you for cuddles, snacks, and always letting me be close to you.
+          Also, I am clearly your favorite. 🐾
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section reveal" id="gallery">
+  <div class="container">
+    <h2>Our Family Album</h2>
+    <p class="section-subtext">Little moments, big love.</p>
+    <div class="photo-grid" id="photoGrid"></div>
+  </div>
+</section>
+
+<!-- MEMORY -->
+<section class="section reveal">
+  <div class="container">
+
+    <h2>Memory Notes</h2>
+
+    <p class="section-subtext">
+      Each click is a reminder of how loved you are.
+    </p>
+
+    <button class="btn btn-primary" id="memoryBtn">
+      Open Memory ✨
+    </button>
+
+    <div class="memory-card" id="memoryCard">
+      <p id="memoryText">Click to reveal a little piece of love.</p>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <p>
+    Made with love for Aai — our home, our comfort, our everything 🤍
+  </p>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button id="lightboxClose">×</button>
+  <img id="lightboxImg">
+  <p id="lightboxCaption"></p>
+</div>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script src="script.js"></script>
+
+</body>
+</html>
+
+
+// ===============================
+// script.js (enhanced interactions)
+// ===============================
+
+const photos = [
+  { src: "photo-01.png", caption: "Warm hugs and open skies." },
+  { src: "photo-02.png", caption: "A family selfie full of love." },
+  { src: "photo-03.png", caption: "Every candid moment is a treasure." },
+  { src: "photo-04.png", caption: "The comfort of being together." },
+  { src: "photo-05.png", caption: "Cozy smiles by the window." },
+  { src: "photo-06.png", caption: "Mirror memories with heart." },
+  { src: "photo-07.png", caption: "Aai and Aurus, best team ever." },
+  { src: "photo-08.png", caption: "A room full of joy and family." },
+  { src: "photo-09.png", caption: "Soft moments from a special day." },
+  { src: "photo-10.png", caption: "Home, comfort, and everyday love." }
+];
+
+const photoGrid = document.getElementById("photoGrid");
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightboxImg");
+const lightboxCaption = document.getElementById("lightboxCaption");
+
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+
+const sprinkleLoveBtn = document.getElementById("sprinkleLoveBtn");
+const hugCounterText = document.getElementById("hugCounterText");
+
+let hugs = 0;
+let musicPlaying = false;
+
+/* -------- Gallery -------- */
+photos.forEach((p) => {
+  const card = document.createElement("div");
+  card.className = "photo-card";
+
+  const img = document.createElement("img");
+  img.src = p.src;
+
+  const caption = document.createElement("div");
+  caption.className = "photo-caption";
+  caption.innerText = p.caption;
+
+  card.appendChild(img);
+  card.appendChild(caption);
+
+  card.onclick = () => {
+    lightbox.classList.add("open");
+    lightboxImg.src = p.src;
+    lightboxCaption.innerText = p.caption;
+
+    // subtle zoom-in feel
+    lightboxImg.style.transform = "scale(0.96)";
+    setTimeout(() => {
+      lightboxImg.style.transform = "scale(1)";
+    }, 50);
+  };
+
+  photoGrid.appendChild(card);
+});
+
+/* -------- Lightbox -------- */
+lightbox.onclick = (e) => {
+  if (e.target === lightbox) {
+    lightbox.classList.remove("open");
+  }
+};
+
+/* -------- Music -------- */
+musicBtn.onclick = () => {
+  if (!musicPlaying) {
+    music.volume = 0;
+    music.play();
+
+    // smooth fade in
+    let vol = 0;
+    const fade = setInterval(() => {
+      if (vol >= 1) clearInterval(fade);
+      vol += 0.05;
+      music.volume = vol;
+    }, 80);
+
+    musicBtn.innerText = "Pause Music ⏸";
+  } else {
+    music.pause();
+    musicBtn.innerText = "Play Music 🎵";
+  }
+
+  musicPlaying = !musicPlaying;
+};
+
+/* -------- Floating Hearts -------- */
+function createHeart() {
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.innerText = "💖";
+
+  h.style.left = Math.random() * 100 + "vw";
+  h.style.fontSize = (14 + Math.random() * 10) + "px";
+  h.style.animationDuration = (1.5 + Math.random() * 1.5) + "s";
+
+  document.body.appendChild(h);
+
+  setTimeout(() => h.remove(), 2500);
+}
+
+/* -------- Hug Button -------- */
+sprinkleLoveBtn.onclick = () => {
+  hugs++;
+  hugCounterText.innerText = `Hugs sent: ${hugs}`;
+
+  // button bounce
+  sprinkleLoveBtn.style.transform = "scale(1.08)";
+  setTimeout(() => {
+    sprinkleLoveBtn.style.transform = "";
+  }, 160);
+
+  // organic burst
+  for (let i = 0; i < 8; i++) {
+    setTimeout(createHeart, i * 80);
+  }
+};
+
+/* -------- Reveal on scroll -------- */
+const reveals = document.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+    }
+  });
+}, { threshold: 0.15 });
+
+reveals.forEach(el => observer.observe(el));
+
+
+/* ===============================
+   FINAL POLISHED STYLE (override)
+   =============================== */
+
+:root {
+  --bg1: #fff8f3;
+  --bg2: #fdf3ea;
+  --accent: #d88c9a;
+  --text: #5a3e3e;
+}
+
 body {
-margin: 0;
-font-family: "Quicksand", sans-serif;
-background: linear-gradient(120deg, #fff8f3, #fdf3ea);
-animation: fadeIn 1s ease;
+  color: var(--text);
+  background: linear-gradient(120deg, var(--bg1), var(--bg2));
+  overflow-x: hidden;
 }
 
-@keyframes fadeIn {
-from {opacity:0;}
-to {opacity:1;}
+/* ambient glow */
+.ambient {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+  z-index: -1;
 }
 
-.container { width: 90%; margin: auto; }
-.section { padding: 4rem 0; text-align:center; }
+.ambient-a { background: #ffdede; top: -100px; left: -80px; }
+.ambient-b { background: #ffe9d6; bottom: -120px; right: -100px; }
 
-.photo-grid {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(180px,1fr));
-gap: 1rem;
+/* headings */
+h1, h2, h3 {
+  font-family: "DM Serif Display", serif;
 }
 
+h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+h2 { font-size: 2rem; }
+
+/* buttons */
+.btn {
+  border-radius: 999px;
+  padding: 0.7rem 1.4rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, #e6a5a5, #d88c9a);
+  color: white;
+  box-shadow: 0 10px 20px rgba(216,140,154,0.3);
+}
+
+.btn-soft {
+  background: white;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.btn:hover {
+  transform: translateY(-3px) scale(1.03);
+}
+
+/* cards */
+.message-card, .memory-card {
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+/* gallery polish */
 .photo-card {
-position: relative;
-overflow: hidden;
-border-radius: 20px;
-cursor: pointer;
-transition: 0.3s;
-}
-
-.photo-card img {
-width:100%;
-height:100%;
-object-fit:cover;
-transition: 0.4s;
-}
-
-.photo-card:hover img {
-transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
 }
 
 .photo-card:hover {
-transform: translateY(-8px);
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.08);
 }
 
-.photo-caption {
-position:absolute;
-bottom:10px;
-left:10px;
-right:10px;
-background:rgba(0,0,0,0.4);
-color:white;
-padding:5px;
-border-radius:10px;
-opacity:0;
-transition:0.3s;
+.photo-card img {
+  transition: transform 0.5s ease;
 }
 
-.photo-card:hover .photo-caption {
-opacity:1;
+.photo-card:hover img {
+  transform: scale(1.08);
 }
 
+/* lightbox polish */
 .lightbox {
-position:fixed;
-inset:0;
-background:rgba(0,0,0,0.8);
-display:none;
-justify-content:center;
-align-items:center;
+  backdrop-filter: blur(6px);
 }
 
-.lightbox.open { display:flex; }
+.lightbox img {
+  border-radius: 20px;
+}
 
+/* hearts upgrade */
 .heart {
-position:fixed;
-bottom:0;
-animation:floatUp 2s forwards;
+  position: fixed;
+  bottom: 0;
+  animation: floatUp ease-out forwards;
 }
 
 @keyframes floatUp {
-to { transform:translateY(-100vh); opacity:0;}
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-110vh) scale(1.4);
+    opacity: 0;
+  }
 }
 
+/* reveal smoother */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
