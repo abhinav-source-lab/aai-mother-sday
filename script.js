@@ -153,10 +153,23 @@ memoryBtn.addEventListener("click", () => {
 sprinkleLoveBtn.addEventListener("click", () => {
   hugsSent += 1;
   hugCounterText.textContent = `Hugs sent: ${hugsSent}`;
+
   sprinkleLoveBtn.style.filter = "brightness(1.05)";
   setTimeout(() => {
     sprinkleLoveBtn.style.filter = "";
   }, 180);
+
+  // Create heart
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.textContent = "❤️";
+
+  document.body.appendChild(heart);
+
+  // Remove after animation
+  setTimeout(() => {
+    heart.remove();
+  }, 1200);
 });
 
 renderGallery();
