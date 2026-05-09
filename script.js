@@ -12,12 +12,26 @@ const photos = [
 ];
 
 const memoryNotes = [
-  "You are the safest place we know.",
-  "Your hugs make hard days feel easy.",
-  "You turn normal days into cherished memories.",
-  "Everything feels calmer when you are around.",
-  "Your love is the rhythm of our home.",
-  "Thank you for always showing up with your whole heart."
+  "You always knew something was wrong… even when I said 'nothing'.",
+  "Your hugs fix things that words never can.",
+  "You somehow make the best food and the best advice at the same time.",
+  "Half strict, half soft — 100% perfect Aai.",
+  "No matter how old I get, I’ll always need you.",
+  "You turn ordinary days into memories we never forget.",
+  "Your voice is still the most comforting sound in the world.",
+  "You worry about everything… especially us ❤️",
+  "You taught me strength without ever raising your voice.",
+  "Home is not a place — it’s wherever you are.",
+  "You remember the smallest things about us that we forget ourselves.",
+  "Your love shows up in a hundred quiet ways every day.",
+  "Even your scolding comes with love hidden inside it 😄",
+  "You make everything feel safe, even when life isn’t.",
+  "You give so much and never ask for anything back.",
+  "There’s no version of life where I don’t need you.",
+  "You are the reason our family feels like home.",
+  "Your care is constant, even when we don’t notice it.",
+  "You’re the only person who can be strict and soft in the same minute 😅",
+  "Every good part of me started with you."
 ];
 
 const revealElements = document.querySelectorAll(".reveal");
