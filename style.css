@@ -106,4 +106,30 @@ h3 { font-size: 1.5rem; margin-bottom: 0.7rem; }
   .photo-card.wide { grid-column: span 2; }
   .lightbox-nav { display: none; }
 }
+.heart {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.6);
+  font-size: 2.5rem;
+  opacity: 0;
+  pointer-events: none;
+  animation: heartFade 1.2s ease forwards;
+  z-index: 1000;
+}
+
+@keyframes heartFade {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+  30% {
+    opacity: 1;
+    transform: translate(-50%, -55%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -70%) scale(1.2);
+  }
+}
 
