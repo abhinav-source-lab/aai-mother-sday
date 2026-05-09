@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Mother's Day, Aai</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient ambient-a" aria-hidden="true"></div>
+  <div class="ambient ambient-b" aria-hidden="true"></div>
+  <header class="hero section reveal">
+    <div class="container">
+      <p class="eyebrow">With all my love</p>
+      <h1>Happy Mother's Day, Aai</h1>
+      <p class="hero-subtitle">
+        This little website is for you — full of love, laughter, memories, and gratitude from me, Aurus, and Anshu.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#gallery">Open Our Album</a>
+        <button class="btn btn-soft" id="sprinkleLoveBtn" type="button">Send Aai a Hug</button>
+      </div>
+      <p class="hug-counter" id="hugCounterText">Hugs sent: 0</p>
+    </div>
+  </header>
+  <main>
+    <section class="section reveal" id="messages">
+      <div class="container">
+        <h2>Messages for You</h2>
+        <div class="message-grid">
+          <article class="message-card tilt-card">
+            <h3>From Me</h3>
+            <p>
+              Aai, thank you for being the heart of our family. You make everything feel warmer, calmer, and better just by being there. So much of who I am comes from your love, your strength, and the way you always show up for us. I am so lucky that I get to call you Aai.
+            </p>
+          </article>
+          <article class="message-card tilt-card">
+            <h3>From Aurus</h3>
+            <p>
+              Dear Aai, thank you for the cuddles, snacks, attention, and for always letting me be near you. Thank you also for understanding that I am, in fact, the most important member of this family. Love, your favorite boy, Aurus.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="section reveal" id="gallery">
+      <div class="container">
+        <h2>Our Family Keepsake Album</h2>
+        <p class="section-subtext">Tap any photo to open it in a cozy fullscreen view.</p>
+        <div class="photo-grid" id="photoGrid"></div>
+      </div>
+    </section>
+    <section class="section reveal" id="memory-wheel">
+      <div class="container memory-shell">
+        <div>
+          <h2>A Little Memory Jar</h2>
+          <p class="section-subtext">Every click pulls out a sweet reminder of how loved you are.</p>
+          <button class="btn btn-primary" id="memoryBtn" type="button">Open a Memory Note</button>
+          <article class="memory-card" id="memoryCard">
+            <p id="memoryText">Click the button to reveal a memory for Aai.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer reveal">
+    <p>Made with love for Aai — forever our home, our comfort, and our heart.</p>
+  </footer>
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close image viewer">&times;</button>
+    <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Previous photo">&#10094;</button>
+    <figure class="lightbox-figure">
+      <img id="lightboxImg" src="" alt="Expanded family memory">
+      <figcaption id="lightboxCaption"></figcaption>
+    </figure>
+    <button class="lightbox-nav next" id="lightboxNext" aria-label="Next photo">&#10095;</button>
+  </div>
+  <button id="scrollTopBtn" aria-label="Scroll to top">↑</button>
+  <script src="script.js"></script>
+</body>
+</html>
