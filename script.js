@@ -160,3 +160,9 @@ sprinkleLoveBtn.addEventListener("click", () => {
 });
 
 renderGallery();
+const bgMusic = new Audio("music.mp3");
+bgMusic.loop = true;
+
+document.addEventListener("click", () => {
+  bgMusic.play();
+}, { once: true });
