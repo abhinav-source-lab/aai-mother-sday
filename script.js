@@ -179,3 +179,18 @@ bgMusic.loop = true;
 document.addEventListener("click", () => {
   bgMusic.play();
 }, { once: true });
+const recipeSection = document.getElementById("recipe");
+
+const recipeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const fills = document.querySelectorAll(".fill");
+      fills.forEach(fill => {
+        fill.style.width = fill.dataset.width;
+      });
+      recipeObserver.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+
+recipeObserver.observe(recipeSection);
