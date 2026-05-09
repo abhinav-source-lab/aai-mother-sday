@@ -159,5 +159,15 @@ h3 { font-size: 1.5rem; margin-bottom: 0.7rem; }
   border-radius: 999px;
   transition: width 1.5s ease;
 }
+.recipe-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+.percent {
+  font-weight: 600;
+  color: #8f6b62;
+  font-size: 0.9rem;
+}
 
