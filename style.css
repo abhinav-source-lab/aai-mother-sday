@@ -157,7 +157,7 @@ h3 { font-size: 1.5rem; margin-bottom: 0.7rem; }
   width: 0;
   background: linear-gradient(90deg, #d6a29e, #b98380);
   border-radius: 999px;
-  transition: width 1.5s ease;
+  transition: width 1.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .recipe-label {
   display: flex;
