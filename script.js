@@ -77,3 +77,4 @@ hugs++;
 hugCounterText.innerText = `Hugs sent: ${hugs}`;
 for(let i=0;i<5;i++) createHeart();
 };
+
