@@ -4,9 +4,9 @@ const photos = [
   { src: "photo-03.png", caption: "Every candid moment is a treasure." },
   { src: "photo-04.png", caption: "The comfort of being together." },
   { src: "photo-05.png", caption: "Cozy smiles by the window." },
-  { src: "photo-06.png", caption: "A room full of joy and family." },
-  { src: "photo-07.png", caption: "Mirror memories with heart." },
-  { src: "photo-08.png", caption: "Aai and Aurus, best team ever." },
+  { src: "photo-06.png", caption: "Mirror memories with heart." },
+  { src: "photo-07.png", caption: "Aai and Aurus, best team ever." },
+  { src: "photo-08.png", caption: "A room full of joy and family." },
   { src: "photo-09.png", caption: "Soft moments from a special day." },
   { src: "photo-10.png", caption: "Home, comfort, and everyday love." }
 ];
