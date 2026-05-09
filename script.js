@@ -38,6 +38,7 @@ const hugCounterText = document.getElementById("hugCounterText");
 let currentIndex = 0;
 let hugsSent = 0;
 
+/* ---------------- Reveal Animation ---------------- */
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -50,21 +51,22 @@ const revealObserver = new IntersectionObserver(
   { threshold: 0.17 }
 );
 
-revealElements.forEach((element) => revealObserver.observe(element));
+revealElements.forEach((el) => revealObserver.observe(el));
 
+/* ---------------- Gallery Layout ---------------- */
 function getCardPattern(index) {
   if (index % 5 === 0) return "wide";
   if (index % 3 === 0) return "tall";
   return "";
 }
 
+/* ---------------- Render Gallery ---------------- */
 function renderGallery() {
   photos.forEach((photo, index) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = `photo-card ${getCardPattern(index)}`.trim();
-    button.dataset.index = String(index);
-    button.dataset.caption = photo.caption;
+    button.dataset.index = index;
     button.setAttribute("aria-label", `Open photo ${index + 1}`);
 
     const image = document.createElement("img");
@@ -72,23 +74,28 @@ function renderGallery() {
     image.alt = `Family photo ${index + 1}`;
     image.loading = "lazy";
 
+    // ✨ NEW: overlay caption
+    const caption = document.createElement("div");
+    caption.className = "photo-caption";
+    caption.textContent = photo.caption;
+
     button.appendChild(image);
+    button.appendChild(caption);
     photoGrid.appendChild(button);
   });
 }
 
+/* ---------------- Lightbox ---------------- */
 function openLightbox(index) {
   currentIndex = index;
   lightboxImg.src = photos[index].src;
   lightboxCaption.textContent = photos[index].caption;
   lightbox.classList.add("open");
-  lightbox.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
 }
 
 function closeLightbox() {
   lightbox.classList.remove("open");
-  lightbox.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
 }
 
@@ -99,64 +106,80 @@ function shiftLightbox(step) {
 }
 
 photoGrid.addEventListener("click", (event) => {
-  const clickedCard = event.target.closest(".photo-card");
-  if (!clickedCard) return;
-  openLightbox(Number(clickedCard.dataset.index));
+  const card = event.target.closest(".photo-card");
+  if (!card) return;
+  openLightbox(Number(card.dataset.index));
 });
 
 lightboxClose.addEventListener("click", closeLightbox);
 lightboxPrev.addEventListener("click", () => shiftLightbox(-1));
 lightboxNext.addEventListener("click", () => shiftLightbox(1));
 
-lightbox.addEventListener("click", (event) => {
-  if (event.target === lightbox) closeLightbox();
+lightbox.addEventListener("click", (e) => {
+  if (e.target === lightbox) closeLightbox();
 });
 
-window.addEventListener("keydown", (event) => {
+window.addEventListener("keydown", (e) => {
   if (!lightbox.classList.contains("open")) return;
-  if (event.key === "Escape") closeLightbox();
-  if (event.key === "ArrowRight") shiftLightbox(1);
-  if (event.key === "ArrowLeft") shiftLightbox(-1);
+  if (e.key === "Escape") closeLightbox();
+  if (e.key === "ArrowRight") shiftLightbox(1);
+  if (e.key === "ArrowLeft") shiftLightbox(-1);
 });
 
+/* ---------------- Scroll Top ---------------- */
 window.addEventListener("scroll", () => {
-  if (window.scrollY > 320) scrollTopBtn.classList.add("show");
-  else scrollTopBtn.classList.remove("show");
+  scrollTopBtn.classList.toggle("show", window.scrollY > 320);
 });
 
-scrollTopBtn.addEventListener("click", () =>
-  window.scrollTo({ top: 0, behavior: "smooth" })
-);
+scrollTopBtn.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
 
+/* ---------------- Tilt Cards ---------------- */
 document.querySelectorAll(".tilt-card").forEach((card) => {
-  card.addEventListener("mousemove", (event) => {
-    const bounds = card.getBoundingClientRect();
-    const x = event.clientX - bounds.left;
-    const y = event.clientY - bounds.top;
-    const rotateY = (x / bounds.width - 0.5) * 4;
-    const rotateX = (y / bounds.height - 0.5) * -4;
+  card.addEventListener("mousemove", (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const rotateY = (x / rect.width - 0.5) * 4;
+    const rotateX = (y / rect.height - 0.5) * -4;
+
     card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
   });
+
   card.addEventListener("mouseleave", () => {
     card.style.transform = "";
   });
 });
 
+/* ---------------- Memory Notes ---------------- */
 memoryBtn.addEventListener("click", () => {
-  const randomNote = memoryNotes[Math.floor(Math.random() * memoryNotes.length)];
-  memoryText.textContent = randomNote;
+  const note = memoryNotes[Math.floor(Math.random() * memoryNotes.length)];
+  memoryText.textContent = note;
+
   memoryCard.classList.remove("show");
   void memoryCard.offsetWidth;
   memoryCard.classList.add("show");
 });
 
+/* ---------------- ✨ Hug Button Upgrade ---------------- */
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.textContent = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 2000);
+}
+
 sprinkleLoveBtn.addEventListener("click", () => {
-  hugsSent += 1;
+  hugsSent++;
   hugCounterText.textContent = `Hugs sent: ${hugsSent}`;
-  sprinkleLoveBtn.style.filter = "brightness(1.05)";
-  setTimeout(() => {
-    sprinkleLoveBtn.style.filter = "";
-  }, 180);
+
+  for (let i = 0; i < 6; i++) createHeart();
 });
 
+/* ---------------- Init ---------------- */
 renderGallery();
